@@ -4,9 +4,10 @@ function getDogImage(num) {
   const url = "https://dog.ceo/api/breeds/image/random/" + num;
   console.log(url);
   fetch(url)
-    .then(response => response.json())
+    .then(response => response.json());
     //change to call displayResults function
-    .then(responseJson => console.log(responseJson))
+    //.then(responseJson => console.log(responseJson))
+    .then(responseJson) => displayResults(responseJson);
     .catch(error => alert('Something went wrong. Try again later.'));
 }
 
@@ -55,9 +56,9 @@ function displayResults(responseJson) {
   
     imageList.forEach(function(element) {
       imageUrls += `<img src="${imageList[element]}" alt="generated dog image # ${x+1}" class="loadedImages">`;
-    });*?
+    });
   
-    $('newDog').replaceWith(`<div class="images">${imageUrls}</div>`);
+    $('images').replaceWith(${imageUrls});
     //display the results section
     /*$('.results').removeClass('hidden');*/
   };
