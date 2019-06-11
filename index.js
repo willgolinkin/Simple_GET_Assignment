@@ -4,10 +4,10 @@ function getDogImage(num) {
   const url = "https://dog.ceo/api/breeds/image/random/" + num;
   console.log(url);
   fetch(url)
-    .then(response => response.json());
+    .then(response => response.json())
     //change to call displayResults function
     //.then(responseJson => console.log(responseJson))
-    .then(responseJson) => displayResults(responseJson);
+    .then(responseJson => displayResults(responseJson))
     .catch(error => alert('Something went wrong. Try again later.'));
 }
 
@@ -32,93 +32,28 @@ function watchForm() {
   });
 }
 
-/*function displayResults(responseJson) {
-  /*console.log(responseJson);
-  //replace the existing image with the new one
-  $('.results-img').replaceWith(
-    //use forEach, map, or for loop to produce each image 
-    responseJson.forEach(function(element) {
-    `<img src="${responseJson.message}" class="results-img">`
-    });
-  )
-  //display the results section
-  $('.results').removeClass('hidden');
-}*/
-
-//using forEach
+//using for loop
 function displayResults(responseJson) {
     const imageList = responseJson.message;
     console.log(imageList);
-    //replace the existing image with the new one
-    $('.newDog').replaceWith(
-      //use forEach, map, or for loop to produce each image 
+    //imageURLs empty string
     let imageUrls = "";
   
-    imageList.forEach(function(element) {
-      imageUrls += `<img src="${imageList[element]}" alt="generated dog image # ${x+1}" class="loadedImages">`;
-    });
+    //for loop to iterate through imageList and return img src for each new image
+    for (let i = 0; i < imageList.length; i++) {
+      imageUrls += `<img src="${imageList[i]}" class="loadedImages">`;
+    };
+
+    //log output image srcs
+    console.log(imageUrls);
+
   
-    $('images').replaceWith(${imageUrls});
-    //display the results section
-    /*$('.results').removeClass('hidden');*/
-  };
+  //replace images with imageUruls
+    $('.images').replaceWith(`<div class="images">${imageUrls}</div>`);
+};
+
 
 $(function() {
   console.log('App loaded! Waiting for submit!');
   watchForm();
 });
-
-/*
-'use strict';
-
-function getDogImage(num) {
-  const url = "https://dog.ceo/api/breeds/image/random/" + num;
-  console.log(url);
-  fetch(url)
-    .then(response => response.json())
-    .then(responseJson => displayResults(responseJson))
-    .catch(error => alert('Something went wrong. Try again later.'));
-}
-
-function checkValidForm(val) {
-  if(val >= 1 && val <= 50) {
-    return true;
-  }
-  else {
-    return false;
-  }
-}
-
-function displayResults(responseJson) {
-  const imageList = responseJson.message;
-  console.log(imageList);
-  let imageUrls = "";
-
-  for (let x = 0;x < imageList.length;x++) {
-    imageUrls += `<img src="${imageList[x]}" alt="Generated dog image # ${x+1}" class="loadedImages">`;
-  }
-
-  console.log(imageUrls);
-
-  $('.images').replaceWith(`<div class="images">${imageUrls}</div>`);
-}
-
-function watchForm() {
-  $('form').submit(event => {
-    event.preventDefault();
-    const resultNum = $('#num').val();
-    if(checkValidForm(resultNum)) {
-      console.log(`Results to retrieve: ${resultNum}`);
-      getDogImage(resultNum);
-    }
-    else {
-      alert('Sorry, you must enter a number between 1 and 50. Try again.')
-    }
-  });
-}
-
-$(function() {
-  console.log('App loaded! Waiting for submit!');
-  watchForm();
-});
-*/
